@@ -20,26 +20,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - path: gnuradio-releases
-            tag: 3.10
-          - path: gnuradio-releases-37
-            tag: 3.7
-          - path: gnuradio-releases-38
-            tag: 3.8
-          - path: gnuradio-releases-39
-            tag: 3.9
+          - path: gnuradio
+            tag: latest
+
 
     name: Build CI container for ${{ matrix.tag }}
     environment: github-action-autobuild
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-#       - name: Log in to the Docker Hub Container registry
-#         if: ${{ github.event_name != 'pull_request' }}
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Log in to the GitHub Container registry
         if: ${{ github.event_name != 'pull_request' }}
         uses: docker/login-action@v2
@@ -53,5 +42,5 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
-            ghcr.io/timelf123/gnuradio:${{ matrix.tag }}
+            ghcr.io/timelf123/docker-gnuradio-smart-meters:${{ matrix.tag }}
           file: ${{ matrix.path }}/Dockerfile

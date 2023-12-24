@@ -4,6 +4,7 @@ LABEL maintainer="Federico 'Larroca' La rocca - flarroca@fing.edu.uy"
 #ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
+DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 
 # else it will output an error about Gtk namespace not found
 RUN apt-get install -y gir1.2-gtk-3.0

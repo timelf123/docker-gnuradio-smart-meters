@@ -3,6 +3,7 @@ name: Create and publish a Docker image
 # Trigger on push and on PR against master. Note that we don't push
 # containers to the registry if we're doing a PR.
 on:
+  workflow_dispatch:
   push:
     branches:
     - 'master'
